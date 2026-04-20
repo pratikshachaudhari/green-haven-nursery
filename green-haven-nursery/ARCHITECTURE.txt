@@ -1,0 +1,235 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    GREEN HAVEN NURSERY - SYSTEM ARCHITECTURE                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              PRESENTATION LAYER                              │
+│                           (Frontend - Client-Side)                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐      │
+│  │   Home      │  │   Plants    │  │    Cart     │  │  Checkout   │      │
+│  │   Page      │  │   Listing   │  │   Page      │  │    Page     │      │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘      │
+│                                                                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                        │
+│  │   About     │  │   Contact   │  │    Auth     │                        │
+│  │    Us       │  │    Page     │  │Login/Register                        │
+│  └─────────────┘  └─────────────┘  └─────────────┘                        │
+│                                                                              │
+│  Technology: HTML5 + Tailwind CSS + Vanilla JavaScript                      │
+│  Hosted On: Netlify / GitHub Pages                                          │
+│                                                                              │
+└──────────────────────────────┬───────────────────────────────────────────────┘
+                               │
+                               │ HTTPS REST API Calls
+                               │ (JSON Request/Response)
+                               │
+┌──────────────────────────────▼───────────────────────────────────────────────┐
+│                              BUSINESS LOGIC LAYER                            │
+│                            (Backend - Server-Side)                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐  │
+│  │                         API ENDPOINTS                                 │  │
+│  ├──────────────────────────────────────────────────────────────────────┤  │
+│  │                                                                       │  │
+│  │  Authentication:                    Cart Management:                 │  │
+│  │  • POST /api/register               • GET  /api/cart                 │  │
+│  │  • POST /api/login                  • POST /api/cart/add             │  │
+│  │  • GET  /api/profile                • POST /api/cart/remove          │  │
+│  │                                      • PUT  /api/cart/update          │  │
+│  │  Products:                                                            │  │
+│  │  • GET /api/products                Order Processing:                │  │
+│  │  • GET /api/products/<id>           • POST /api/checkout             │  │
+│  │                                      • GET  /api/orders               │  │
+│  │                                                                       │  │
+│  └──────────────────────────────────────────────────────────────────────┘  │
+│                                                                              │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐         │
+│  │   Auth Service   │  │   Cart Service   │  │  Order Service   │         │
+│  │                  │  │                  │  │                  │         │
+│  │ • JWT Tokens     │  │ • Add/Remove     │  │ • Create Order   │         │
+│  │ • Password Hash  │  │ • Update Qty     │  │ • Generate Code  │         │
+│  │ • Session Mgmt   │  │ • Calculate $    │  │ • Process COD    │         │
+│  └──────────────────┘  └──────────────────┘  └──────────────────┘         │
+│                                                                              │
+│  Technology: Python 3 + Flask + SQLAlchemy + JWT + bcrypt                   │
+│  Hosted On: Render                                                           │
+│                                                                              │
+└──────────────────────────────┬───────────────────────────────────────────────┘
+                               │
+                               │ SQL Queries
+                               │ (ORM - SQLAlchemy)
+                               │
+┌──────────────────────────────▼───────────────────────────────────────────────┐
+│                              DATA PERSISTENCE LAYER                          │
+│                               (Database)                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │    users     │  │   products   │  │     cart     │  │    orders    │  │
+│  ├──────────────┤  ├──────────────┤  ├──────────────┤  ├──────────────┤  │
+│  │ • id         │  │ • id         │  │ • id         │  │ • id         │  │
+│  │ • name       │  │ • name       │  │ • user_id    │  │ • user_id    │  │
+│  │ • email      │  │ • description│  │ • created_at │  │ • total      │  │
+│  │ • password   │  │ • price      │  └──────────────┘  │ • status     │  │
+│  │ • phone      │  │ • image_url  │                    │ • code       │  │
+│  │ • address    │  │ • stock      │  ┌──────────────┐  │ • address    │  │
+│  └──────────────┘  │ • category   │  │  cart_items  │  └──────────────┘  │
+│                    └──────────────┘  ├──────────────┤                     │
+│  ┌──────────────┐                    │ • cart_id    │  ┌──────────────┐  │
+│  │   payments   │                    │ • product_id │  │ order_items  │  │
+│  ├──────────────┤                    │ • quantity   │  ├──────────────┤  │
+│  │ • id         │                    └──────────────┘  │ • order_id   │  │
+│  │ • order_id   │                                      │ • product_id │  │
+│  │ • method     │                                      │ • quantity   │  │
+│  │ • status     │                                      │ • price      │  │
+│  │ • amount     │                                      └──────────────┘  │
+│  └──────────────┘                                                          │
+│                                                                              │
+│  Technology: SQLite (Development) / PostgreSQL (Production)                  │
+│  Hosted On: Supabase / Railway                                               │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              DATA FLOW EXAMPLE                               ║
+║                      (User Placing an Order)                                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+1. User fills checkout form
+   ↓
+2. Frontend: POST /api/checkout with delivery address
+   ↓
+3. Backend: Validates JWT token
+   ↓
+4. Backend: Retrieves user's cart from database
+   ↓
+5. Backend: Validates all products in stock
+   ↓
+6. Backend: Creates order record
+   ↓
+7. Backend: Generates unique delivery code (GH-XXXXXXXX)
+   ↓
+8. Backend: Creates order items from cart items
+   ↓
+9. Backend: Reduces product stock levels
+   ↓
+10. Backend: Creates payment record (COD)
+    ↓
+11. Backend: Clears user's cart
+    ↓
+12. Backend: Returns order with delivery code
+    ↓
+13. Frontend: Shows success modal with delivery code
+    ↓
+14. Frontend: Redirects to home page
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            SECURITY LAYERS                                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Layer 1: Frontend Validation                                                │
+│ • Email format validation                                                   │
+│ • Password length check (6+ chars)                                          │
+│ • Phone number format                                                       │
+│ • Required field validation                                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Layer 2: HTTPS Transport                                                    │
+│ • All data encrypted in transit                                             │
+│ • JWT tokens sent in Authorization header                                   │
+│ • CORS protection prevents unauthorized origins                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Layer 3: Backend Authentication                                             │
+│ • JWT token validation on every request                                     │
+│ • Token expiration (7 days)                                                 │
+│ • User identity verification                                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Layer 4: Backend Validation                                                 │
+│ • Input sanitization                                                        │
+│ • SQL injection prevention (SQLAlchemy ORM)                                 │
+│ • XSS protection                                                            │
+│ • Business logic validation                                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Layer 5: Database Security                                                  │
+│ • Passwords hashed with bcrypt (never stored plain)                         │
+│ • Foreign key constraints                                                   │
+│ • Parameterized queries                                                     │
+│ • Access control (user can only access own data)                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         TECHNOLOGY STACK SUMMARY                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Frontend (Presentation)
+├── HTML5 (Structure)
+├── Tailwind CSS (Styling)
+└── Vanilla JavaScript (Interactivity)
+
+Backend (Business Logic)
+├── Python 3.8+ (Language)
+├── Flask (Web Framework)
+├── SQLAlchemy (ORM)
+├── Flask-JWT-Extended (Authentication)
+├── bcrypt (Password Hashing)
+├── Flask-CORS (Cross-Origin)
+└── Flask-Mail (Email Service)
+
+Database (Persistence)
+├── SQLite (Development)
+└── PostgreSQL (Production)
+
+Deployment
+├── Frontend → Netlify
+├── Backend → Render
+└── Database → Supabase
+
+Development Tools
+├── Git (Version Control)
+├── pip (Package Management)
+├── venv (Virtual Environment)
+└── SQLite CLI (Database Management)
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              FILE COUNT                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Frontend:     15 files (HTML, CSS, JS)
+Backend:      24 files (Python, Config)
+Database:      1 file  (SQL Schema)
+Documentation: 7 files  (Markdown Guides)
+Configuration: 3 files  (Env, Git, Requirements)
+───────────────────────────────────────────
+Total:        50+ files, 8,500+ lines of code
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                       PRODUCTION DEPLOYMENT URLS                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Frontend:  https://green-haven-nursery.netlify.app
+Backend:   https://green-haven-nursery-api.onrender.com
+Database:  [Supabase Dashboard]
+
+Health:    https://green-haven-nursery-api.onrender.com/health
+API Docs:  See API_DOCUMENTATION.md
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                        END OF ARCHITECTURE DIAGRAM
+═══════════════════════════════════════════════════════════════════════════════

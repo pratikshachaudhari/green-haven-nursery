@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Green Haven Nursery</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-stone-50">
+    
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span class="text-2xl font-serif text-emerald-900 tracking-tight">Green Haven</span>
+                </div>
+                
+                <ul class="hidden md:flex space-x-8 text-sm">
+                    <li><a href="../index.html" class="text-stone-600 hover:text-emerald-600 transition">Home</a></li>
+                    <li><a href="plants.html" class="text-stone-600 hover:text-emerald-600 transition">Plants</a></li>
+                    <li><a href="about.html" class="text-stone-600 hover:text-emerald-600 transition">About</a></li>
+                    <li><a href="contact.html" class="text-emerald-800 font-medium hover:text-emerald-600 transition">Contact</a></li>
+                </ul>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="relative">
+                        <svg class="w-6 h-6 text-stone-700 hover:text-emerald-700 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </a>
+                    <a href="auth.html" id="auth-link" class="text-sm text-stone-600 hover:text-emerald-700 transition">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-emerald-50 to-white py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-5xl font-serif text-emerald-950 mb-6">Get In Touch</h1>
+            <p class="text-xl text-stone-600 leading-relaxed">
+                We'd love to hear from you. Have questions about our plants or need care advice?
+            </p>
+        </div>
+    </section>
+    
+    <!-- Contact Content -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-3xl p-10 shadow-xl">
+                    <h2 class="text-3xl font-serif text-emerald-950 mb-6">Send Us a Message</h2>
+                    
+                    <form onsubmit="handleContactForm(event)" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-stone-700 mb-2">Your Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required 
+                                class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                placeholder="John Doe"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-stone-700 mb-2">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required 
+                                class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                placeholder="you@example.com"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-stone-700 mb-2">Subject</label>
+                            <input 
+                                type="text" 
+                                id="subject" 
+                                name="subject" 
+                                required 
+                                class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                placeholder="How can we help?"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-stone-700 mb-2">Message</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                required 
+                                rows="5"
+                                class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
+                                placeholder="Tell us more about your inquiry..."
+                            ></textarea>
+                        </div>
+                        
+                        <button 
+                            type="submit" 
+                            class="w-full bg-emerald-700 text-white py-3 rounded-full font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl"
+                        >
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-3xl p-10 shadow-xl">
+                        <h2 class="text-3xl font-serif text-emerald-950 mb-6">Contact Information</h2>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-emerald-900 mb-1">Email</h3>
+                                    <p class="text-stone-600">info@greenhaven.com</p>
+                                    <p class="text-stone-600">support@greenhaven.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-emerald-900 mb-1">Phone</h3>
+                                    <p class="text-stone-600">(555) 123-4567</p>
+                                    <p class="text-stone-600 text-sm">Mon-Sat: 9AM - 6PM</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-emerald-900 mb-1">Address</h3>
+                                    <p class="text-stone-600">123 Garden Lane</p>
+                                    <p class="text-stone-600">Green Valley, CA 94523</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Quick Links -->
+                    <div class="bg-emerald-50 rounded-3xl p-10 border border-emerald-100">
+                        <h3 class="text-2xl font-serif text-emerald-950 mb-4">Common Questions</h3>
+                        <ul class="space-y-3 text-stone-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-700 mt-1">•</span>
+                                <span>Delivery typically takes 3-5 business days</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-700 mt-1">•</span>
+                                <span>We offer Cash on Delivery (COD) payment</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-700 mt-1">•</span>
+                                <span>Free shipping on all orders</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-700 mt-1">•</span>
+                                <span>Care guides included with every plant</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-serif">Green Haven</h4>
+                    <p class="text-emerald-200 text-sm">
+                        Bringing nature to your doorstep with love and care.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200">
+                        <li><a href="plants.html" class="hover:text-white transition">Shop Plants</a></li>
+                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Customer Service</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200">
+                        <li><a href="#" class="hover:text-white transition">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition">Care Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Contact Us</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200">
+                        <li>Email: info@greenhaven.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Open: Mon-Sat, 9AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-emerald-800 mt-12 pt-8 text-center text-sm text-emerald-300">
+                <p>&copy; 2024 Green Haven Nursery. Built with care for nature lovers.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const data = {
+                name: form.name.value,
+                email: form.email.value,
+                subject: form.subject.value,
+                message: form.message.value
+            };
+            
+            // In a real application, this would send to backend
+            console.log('Contact form submitted:', data);
+            
+            showToast('Thank you for your message! We\'ll get back to you soon.', 'success');
+            form.reset();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Haven Nursery - Premium Flowering Plants</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-stone-50">
+    
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span class="text-2xl font-serif text-emerald-900 tracking-tight">Green Haven</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <ul class="hidden md:flex space-x-8 text-sm">
+                    <li><a href="index.html" class="text-emerald-800 font-medium hover:text-emerald-600 transition">Home</a></li>
+                    <li><a href="pages/plants.html" class="text-stone-600 hover:text-emerald-600 transition">Plants</a></li>
+                    <li><a href="pages/about.html" class="text-stone-600 hover:text-emerald-600 transition">About</a></li>
+                    <li><a href="pages/contact.html" class="text-stone-600 hover:text-emerald-600 transition">Contact</a></li>
+                </ul>
+                
+                <!-- Cart & Auth -->
+                <div class="flex items-center space-x-4">
+                    <a href="pages/cart.html" class="relative">
+                        <svg class="w-6 h-6 text-stone-700 hover:text-emerald-700 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </a>
+                    <a href="pages/auth.html" id="auth-link" class="text-sm text-stone-600 hover:text-emerald-700 transition">Login</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-stone-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <ul class="flex flex-col space-y-3">
+                    <li><a href="index.html" class="text-emerald-800 font-medium">Home</a></li>
+                    <li><a href="pages/plants.html" class="text-stone-600 hover:text-emerald-600">Plants</a></li>
+                    <li><a href="pages/about.html" class="text-stone-600 hover:text-emerald-600">About</a></li>
+                    <li><a href="pages/contact.html" class="text-stone-600 hover:text-emerald-600">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-emerald-50 via-white to-stone-50 py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="space-y-6 animate-fade-in">
+                    <h1 class="text-5xl md:text-6xl font-serif text-emerald-950 leading-tight">
+                        Bring Nature<br/>
+                        <span class="text-emerald-700">Into Your Home</span>
+                    </h1>
+                    <p class="text-lg text-stone-600 leading-relaxed max-w-md">
+                        For over a decade, we've nurtured beautiful flowering plants with care and passion. Now bringing our nursery to your doorstep.
+                    </p>
+                    <div class="flex space-x-4 pt-4">
+                        <a href="pages/plants.html" class="bg-emerald-700 text-white px-8 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            Shop Plants
+                        </a>
+                        <a href="pages/about.html" class="border-2 border-emerald-700 text-emerald-700 px-8 py-3 rounded-full hover:bg-emerald-50 transition">
+                            Our Story
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Image Placeholder -->
+                <div class="relative animate-slide-in">
+                    <div class="bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-3xl p-12 shadow-2xl">
+                        <svg class="w-full h-96 text-emerald-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.12 13.38 1 12 1S9.5 2.12 9.5 3.5l.02.19c-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z"/>
+                        </svg>
+                    </div>
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-emerald-200 rounded-full opacity-50 blur-2xl"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-emerald-300 rounded-full opacity-40 blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Plants Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif text-emerald-950 mb-4">Featured Flowering Plants</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto">
+                    Handpicked selection of our most beloved blooms, carefully tended for vibrant health and stunning beauty.
+                </p>
+            </div>
+            
+            <!-- Plant Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8" id="featured-plants">
+                <!-- Plants will be loaded dynamically -->
+                <div class="animate-pulse">
+                    <div class="bg-stone-200 rounded-2xl h-80"></div>
+                    <div class="mt-4 h-4 bg-stone-200 rounded w-3/4"></div>
+                    <div class="mt-2 h-4 bg-stone-200 rounded w-1/2"></div>
+                </div>
+                <div class="animate-pulse">
+                    <div class="bg-stone-200 rounded-2xl h-80"></div>
+                    <div class="mt-4 h-4 bg-stone-200 rounded w-3/4"></div>
+                    <div class="mt-2 h-4 bg-stone-200 rounded w-1/2"></div>
+                </div>
+                <div class="animate-pulse">
+                    <div class="bg-stone-200 rounded-2xl h-80"></div>
+                    <div class="mt-4 h-4 bg-stone-200 rounded w-3/4"></div>
+                    <div class="mt-2 h-4 bg-stone-200 rounded w-1/2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif text-emerald-950 mb-4">Why Choose Green Haven</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Feature 1 -->
+                <div class="text-center space-y-4">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full">
+                        <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif text-emerald-900">10 Years Experience</h3>
+                    <p class="text-stone-600">A decade of nurturing plants with expertise and dedication.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="text-center space-y-4">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full">
+                        <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif text-emerald-900">Healthy Plants</h3>
+                    <p class="text-stone-600">Every plant is carefully inspected and nurtured before delivery.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="text-center space-y-4">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full">
+                        <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif text-emerald-900">Safe Delivery</h3>
+                    <p class="text-stone-600">Secure packaging ensures your plants arrive in perfect condition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div class="space-y-4">
+                    <h4 class="text-xl font-serif">Green Haven</h4>
+                    <p class="text-emerald-200 text-sm">
+                        Bringing nature to your doorstep with love and care.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200">
+                        <li><a href="pages/plants.html" class="hover:text-white transition">Shop Plants</a></li>
+                        <li><a href="pages/about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="pages/contact.html" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Service -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Customer Service</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200">
+                        <li><a href="#" class="hover:text-white transition">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition">Care Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Contact Us</h4>
+                    <ul class="space-y-2 text-sm text-emerald-200">
+                        <li>Email: info@greenhaven.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Open: Mon-Sat, 9AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-emerald-800 mt-12 pt-8 text-center text-sm text-emerald-300">
+                <p>&copy; 2024 Green Haven Nursery. Built with care for nature lovers.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
