@@ -4,7 +4,7 @@
 // ===================================
 
 // API Configuration
-const API_BASE_URL = 'https://green-haven-nursery.onrender.com/';
+const API_BASE_URL = 'https://green-haven-nursery.onrender.com/api';
 
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
