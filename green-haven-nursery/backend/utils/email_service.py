@@ -158,8 +158,10 @@ def send_order_confirmation(user, order, invoice_path=None):
         Order Date: {order.created_at.strftime('%B %d, %Y')}
         Payment Method: Cash on Delivery (COD)
         
-        Items:
-        {"".join([f"{item.product.name} x {item.quantity} - ${item.get_subtotal()}\n" for item in order.items])}
+        items_text = "\n".join(
+        f"{item.product.name} x {item.quantity} - ${item.get_subtotal()}"
+        for item in order.items
+        )
         
         Total: ${float(order.total_amount):.2f}
         
