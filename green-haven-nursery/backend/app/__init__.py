@@ -66,7 +66,11 @@ def create_app():
         return {'status': 'healthy', 'service': 'Green Haven Nursery API'}, 200
     
     # Create database tables
-    with app.app_context():
-        db.create_all()
+    if app.config.get("DEBUG"):
+        try:
+            with app.app_context():
+                db.create_all()
+        except Exception as e:
+            print(f"Database initialization warning: {e}")
     
     return app
