@@ -33,7 +33,7 @@ def create_app():
     # Enable CORS
     CORS(app, resources={
         r"/api/*": {
-            "origins": config.CORS_ORIGINS,
+            "origins": ["https://pratikshachaudhari.github.io"],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"]
         }
