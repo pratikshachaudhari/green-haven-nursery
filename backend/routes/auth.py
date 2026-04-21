@@ -120,7 +120,7 @@ def login():
             return jsonify({'message': 'Invalid email or password'}), 401
         
         # Create JWT token
-        access_token = create_access_token(identity=user.id)
+       access_token = create_access_token(identity=str(user.id))
         
         return jsonify({
             'message': 'Login successful',
@@ -141,7 +141,7 @@ def get_profile():
     Requires JWT token in Authorization header
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         
         if not user:
@@ -164,7 +164,7 @@ def update_profile():
     Requires JWT token in Authorization header
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         
         if not user:
