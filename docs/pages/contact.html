@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Green Haven Nursery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-stone-50">
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                </svg>
+                <span class="text-2xl font-serif text-emerald-900 tracking-tight">Green Haven</span>
+            </div>
+            <ul class="hidden md:flex space-x-8 text-sm">
+                <li><a href="../index.html" class="text-stone-600 hover:text-emerald-600 transition">Home</a></li>
+                <li><a href="plants.html" class="text-stone-600 hover:text-emerald-600 transition">Plants</a></li>
+                <li><a href="about.html" class="text-stone-600 hover:text-emerald-600 transition">About</a></li>
+                <li><a href="contact.html" class="text-emerald-800 font-medium hover:text-emerald-600 transition">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-br from-emerald-50 to-white py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-5xl font-serif text-emerald-950 mb-4">Contact Us</h1>
+            <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                We’d love to help with plant selection, care guidance, or delivery questions.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+            <div class="bg-white rounded-3xl shadow-lg p-8 space-y-5">
+                <h2 class="text-3xl font-serif text-emerald-950">Get in touch</h2>
+                <p class="text-stone-600">Reach out to us for plant care advice, order support, or nursery enquiries.</p>
+                <div class="space-y-3 text-stone-700">
+                    <p><strong>Email:</strong> info@greenhaven.com</p>
+                    <p><strong>Phone:</strong> (555) 123-4567</p>
+                    <p><strong>Hours:</strong> Mon–Sat, 9AM–6PM</p>
+                    <p><strong>Address:</strong> Green Haven Nursery, Garden Lane, Your Town</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-lg p-8">
+                <form class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-2">Full Name</label>
+                        <input type="text" placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-2">Email</label>
+                        <input type="email" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-2">Message</label>
+                        <textarea rows="5" placeholder="How can we help?"></textarea>
+                    </div>
+                    <button type="submit" class="bg-emerald-700 text-white px-8 py-3 rounded-full hover:bg-emerald-800 transition">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-emerald-950 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-emerald-300">
+            <p>&copy; 2024 Green Haven Nursery. Built with care for nature lovers.</p>
+        </div>
+    </footer>
+</body>
+</html>
