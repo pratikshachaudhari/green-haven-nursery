@@ -3,24 +3,34 @@ Green Haven Nursery - Email Service
 Sends order confirmation emails with delivery codes
 """
 
-from flask import current_app
 from flask_mail import Message
 from app import mail
 import os
 
 
 def send_order_confirmation(user, order, invoice_path=None):
-    """
-    Send order confirmation email to customer
-    
-    Args:
-        user: User object
-        order: Order object
-        invoice_path: Path to invoice PDF (optional)
-    """
     try:
         subject = f"Order Confirmation - {order.delivery_code}"
-        
+
+        # Build order items HTML separately
+        items_html = "".join([
+            f"""
+            <div class="item">
+                <div style="display: flex; justify-content: space-between;">
+                    <span>{item.product.name} x {item.quantity}</span>
+                    <span>${item.get_subtotal()}</span>
+                </div>
+            </div>
+            """
+            for item in order.items
+        ])
+
+        # Build order items text separately
+        items_text = "".join([
+            f"{item.product.name} x {item.quantity} - ${item.get_subtotal()}\n"
+            for item in order.items
+        ])
+
         # Email body (HTML)
         html_body = f"""
         <!DOCTYPE html>
@@ -85,42 +95,35 @@ def send_order_confirmation(user, order, invoice_path=None):
                 <h1>🌱 Green Haven Nursery</h1>
                 <p>Thank you for your order!</p>
             </div>
-            
+
             <div class="content">
                 <h2>Hi {user.name},</h2>
                 <p>We're excited to confirm your order! Your beautiful plants will be carefully packaged and delivered soon.</p>
-                
+
                 <div class="delivery-code">
                     <div style="font-size: 14px; margin-bottom: 5px;">Your Delivery Code</div>
                     {order.delivery_code}
                 </div>
-                
+
                 <p><strong>Please keep this code handy</strong> - you'll need it to receive your delivery.</p>
-                
+
                 <div class="order-details">
                     <h3>Order Details</h3>
                     <p><strong>Order ID:</strong> #{order.id}</p>
                     <p><strong>Order Date:</strong> {order.created_at.strftime('%B %d, %Y')}</p>
                     <p><strong>Payment Method:</strong> Cash on Delivery (COD)</p>
-                    
+
                     <h4>Items:</h4>
-                    {"".join([f'''
-                    <div class="item">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>{item.product.name} x {item.quantity}</span>
-                            <span>${item.get_subtotal()}</span>
-                        </div>
-                    </div>
-                    ''' for item in order.items])}
-                    
+                    {items_html}
+
                     <div class="total">
                         Total: ${float(order.total_amount):.2f}
                     </div>
-                    
+
                     <h4>Delivery Address:</h4>
                     <p>{order.delivery_address}</p>
                 </div>
-                
+
                 <h3>What's Next?</h3>
                 <ul>
                     <li>Your plants are being carefully prepared for delivery</li>
@@ -128,11 +131,11 @@ def send_order_confirmation(user, order, invoice_path=None):
                     <li>Keep your delivery code ready when the driver arrives</li>
                     <li>Payment will be collected upon delivery</li>
                 </ul>
-                
+
                 <h3>Care Instructions</h3>
                 <p>Each plant comes with detailed care instructions. For additional support, visit our website or contact us at info@greenhaven.com</p>
             </div>
-            
+
             <div class="footer">
                 <p>Green Haven Nursery | Bringing nature to your doorstep</p>
                 <p>Email: info@greenhaven.com | Phone: (555) 123-4567</p>
@@ -141,48 +144,46 @@ def send_order_confirmation(user, order, invoice_path=None):
         </body>
         </html>
         """
-        
+
         # Plain text version
         text_body = f"""
         Green Haven Nursery - Order Confirmation
-        
+
         Hi {user.name},
-        
+
         Thank you for your order!
-        
+
         Your Delivery Code: {order.delivery_code}
         (Please keep this code - you'll need it for delivery)
-        
+
         Order Details:
         Order ID: #{order.id}
         Order Date: {order.created_at.strftime('%B %d, %Y')}
         Payment Method: Cash on Delivery (COD)
-        
+
         Items:
-        {"".join([f"{item.product.name} x {item.quantity} - ${item.get_subtotal()}\n" for item in order.items])}
-        
+        {items_text}
+
         Total: ${float(order.total_amount):.2f}
-        
+
         Delivery Address:
         {order.delivery_address}
-        
+
         Expected Delivery: 3-5 business days
-        
+
         Questions? Contact us at info@greenhaven.com or (555) 123-4567
-        
+
         Best regards,
         Green Haven Nursery Team
         """
-        
-        # Create message
+
         msg = Message(
             subject=subject,
             recipients=[user.email],
             body=text_body,
             html=html_body
         )
-        
-        # Attach invoice if available
+
         if invoice_path and os.path.exists(invoice_path):
             with open(invoice_path, 'rb') as f:
                 msg.attach(
@@ -190,35 +191,26 @@ def send_order_confirmation(user, order, invoice_path=None):
                     "application/pdf",
                     f.read()
                 )
-        
-        # Send email
+
         mail.send(msg)
-        
         return True
-        
+
     except Exception as e:
         print(f"Error sending email: {str(e)}")
-        # Log error but don't fail the order
         return False
 
 
 def send_test_email(recipient):
-    """
-    Send a test email to verify email configuration
-    
-    Args:
-        recipient (str): Email address to send test email to
-    """
     try:
         msg = Message(
             subject="Test Email - Green Haven Nursery",
             recipients=[recipient],
             body="This is a test email from Green Haven Nursery. If you received this, email configuration is working correctly!"
         )
-        
+
         mail.send(msg)
         return True
-        
+
     except Exception as e:
         print(f"Test email error: {str(e)}")
         return False
