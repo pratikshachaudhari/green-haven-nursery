@@ -28,7 +28,7 @@ def checkout():
     Creates order, payment record, sends email confirmation
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         
         if not user:
@@ -103,7 +103,7 @@ def get_orders():
     Get all orders for current user
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         
         if not user:
@@ -127,7 +127,7 @@ def get_order(order_id):
     Get specific order details
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         order = Order.query.get(order_id)
         
         if not order:
@@ -153,7 +153,7 @@ def cancel_order(order_id):
     Cancel an order (only if status is 'pending' or 'confirmed')
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         order = Order.query.get(order_id)
         
         if not order:
