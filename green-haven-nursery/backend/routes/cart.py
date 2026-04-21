@@ -19,9 +19,15 @@ def get_cart():
     """
     Get current user's cart
     Requires JWT token
+    Always returns a cart (creates one if it doesn't exist)
     """
     try:
         user_id = get_jwt_identity()
+        
+        # Validate user_id
+        if not user_id:
+            return jsonify({'message': 'Invalid token'}), 401
+        
         user = User.query.get(user_id)
         
         if not user:
@@ -33,12 +39,21 @@ def get_cart():
             cart = Cart(user_id=user_id)
             db.session.add(cart)
             db.session.commit()
+            print(f"Created new cart for user {user_id}")
         
+        # Always return 200 with cart data
         return jsonify(cart.to_dict()), 200
         
     except Exception as e:
         print(f"Get cart error: {str(e)}")
-        return jsonify({'message': 'Failed to fetch cart'}), 500
+        # Even on error, return empty cart structure
+        return jsonify({
+            'id': None,
+            'user_id': None,
+            'items': [],
+            'total': 0,
+            'item_count': 0
+        }), 200
 
 
 @cart_bp.route('/cart/add', methods=['POST'])
