@@ -70,7 +70,11 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     
     # Production CORS
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', '').split(',')
+    cors_env = os.getenv('CORS_ORIGINS', '*')
+    if cors_env == '*':
+        CORS_ORIGINS = '*'
+    else:
+        CORS_ORIGINS = [origin.strip() for origin in cors_env.split(',') if origin.strip()]
     
     # Force HTTPS
     PREFERRED_URL_SCHEME = 'https'
