@@ -120,7 +120,7 @@ def login():
             return jsonify({'message': 'Invalid email or password'}), 401
         
         # Create JWT token
-       access_token = create_access_token(identity=str(user.id))
+        access_token = create_access_token(identity=str(user.id))
         
         return jsonify({
             'message': 'Login successful',
