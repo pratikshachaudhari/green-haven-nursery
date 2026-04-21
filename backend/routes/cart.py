@@ -113,7 +113,7 @@ def remove_from_cart():
     }
     """
     try:
-       user_id = int(get_jwt_identity())
+        user_id = int(get_jwt_identity())
         data = request.get_json()
         
         if not data.get('product_id'):
