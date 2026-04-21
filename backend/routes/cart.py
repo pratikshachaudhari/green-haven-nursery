@@ -21,7 +21,7 @@ def get_cart():
     Requires JWT token
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         
         if not user:
@@ -54,7 +54,7 @@ def add_to_cart():
     }
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         data = request.get_json()
         
         # Validate input
@@ -113,7 +113,7 @@ def remove_from_cart():
     }
     """
     try:
-        user_id = get_jwt_identity()
+       user_id = int(get_jwt_identity())
         data = request.get_json()
         
         if not data.get('product_id'):
@@ -157,7 +157,7 @@ def update_cart_item():
     }
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         data = request.get_json()
         
         if not data.get('product_id') or 'quantity' not in data:
@@ -210,7 +210,7 @@ def clear_cart():
     Clear all items from cart
     """
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         cart = user.cart
         
