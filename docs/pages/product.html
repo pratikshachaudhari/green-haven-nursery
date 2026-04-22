@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Details - Green Haven Nursery</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-stone-50">
+
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span class="text-2xl font-serif text-emerald-900 tracking-tight">Green Haven</span>
+                </div>
+
+                <ul class="hidden md:flex space-x-8 text-sm">
+                    <li><a href="../index.html" class="text-stone-600 hover:text-emerald-600 transition">Home</a></li>
+                    <li><a href="plants.html" class="text-emerald-800 font-medium hover:text-emerald-600 transition">Plants</a></li>
+                    <li><a href="about.html" class="text-stone-600 hover:text-emerald-600 transition">About</a></li>
+                    <li><a href="contact.html" class="text-stone-600 hover:text-emerald-600 transition">Contact</a></li>
+                </ul>
+
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="relative">
+                        <svg class="w-6 h-6 text-stone-700 hover:text-emerald-700 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </a>
+                    <a href="auth.html" id="auth-link" class="text-sm text-stone-600 hover:text-emerald-700 transition">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-br from-emerald-50 to-white py-14">
+        <div class="max-w-7xl mx-auto px-6">
+            <a href="plants.html" class="text-emerald-700 hover:text-emerald-800 transition text-sm">← Back to Plants</a>
+        </div>
+    </section>
+
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6" id="product-details">
+            <div class="text-center py-16 text-stone-500">Loading plant details...</div>
+        </div>
+    </section>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const productGallery = {
+            1: [
+                "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=1200",
+                "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=1200",
+                "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1200"
+            ],
+            2: [
+                "https://images.unsplash.com/photo-1649531373165-f451adc09418?q=80&w=1200&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200",
+                "https://images.unsplash.com/photo-1459156212016-c812468e2115?w=1200"
+            ],
+            3: [
+                "https://images.unsplash.com/photo-1592077549602-10fd792e416e?w=1200",
+                "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
+                "https://images.unsplash.com/photo-1468327768560-75b778cbb551?w=1200"
+            ],
+            4: [
+                "https://images.unsplash.com/photo-1688481156464-4285423c8b39?w=1200",
+                "https://images.unsplash.com/photo-1463154545680-d59320fd685d?w=1200",
+                "https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=1200"
+            ],
+            5: [
+                "https://images.unsplash.com/photo-1649619423248-f2714c101661?w=1200",
+                "https://images.unsplash.com/photo-1496065187959-7f07b8353c55?w=1200",
+                "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200"
+            ]
+        };
+
+        let currentProduct = null;
+        let currentImages = [];
+
+        function getProductIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        function changeMainImage(imageUrl) {
+            const mainImage = document.getElementById('main-product-image');
+            if (mainImage) {
+                mainImage.src = imageUrl;
+            }
+        }
+
+        function renderProduct(product) {
+            const container = document.getElementById('product-details');
+            const extraImages = productGallery[product.id] || [product.image_url].filter(Boolean);
+            currentImages = extraImages.length ? extraImages : [];
+
+            const thumbnails = currentImages.map((img, index) => `
+                <button
+                    type="button"
+                    onclick="changeMainImage('${img}')"
+                    class="rounded-xl overflow-hidden border ${index === 0 ? 'border-emerald-600' : 'border-stone-200'} hover:border-emerald-500 transition"
+                >
+                    <img src="${img}" alt="${product.name} thumbnail ${index + 1}" class="w-24 h-24 object-cover">
+                </button>
+            `).join('');
+
+            const careTips = {
+                1: ["Low to medium light", "Water when top soil dries", "Excellent indoor air purifier"],
+                2: ["Bright indirect light", "Water lightly once a week", "Avoid direct harsh sunlight"],
+                3: ["Bright filtered light", "Keep soil lightly moist", "Great for windowsills"],
+                4: ["Medium indirect light", "Water when top inch is dry", "Tropical indoor favorite"],
+                5: ["Partial shade", "Do not overwater", "Beginner friendly flowering plant"]
+            };
+
+            const tips = (careTips[product.id] || ["Healthy flowering plant", "Indoor friendly", "Easy home care"]).map(tip => `
+                <li class="flex items-start gap-2">
+                    <span class="text-emerald-700 mt-1">•</span>
+                    <span>${tip}</span>
+                </li>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-5">
+                        <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+                            <img
+                                id="main-product-image"
+                                src="${currentImages[0] || product.image_url || ''}"
+                                alt="${product.name}"
+                                class="w-full h-[520px] object-cover"
+                            >
+                        </div>
+
+                        <div class="flex gap-3 flex-wrap">
+                            ${thumbnails}
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-sm uppercase tracking-[0.2em] text-emerald-700 mb-2">Flowering Plant</p>
+                            <h1 class="text-4xl md:text-5xl font-serif text-emerald-950">${product.name}</h1>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <span class="text-3xl font-serif text-emerald-700">$${Number(product.price).toFixed(2)}</span>
+                            ${product.stock > 0
+                                ? `<span class="inline-flex bg-emerald-100 text-emerald-800 text-sm px-3 py-1 rounded-full">In Stock (${product.stock})</span>`
+                                : `<span class="inline-flex bg-red-100 text-red-700 text-sm px-3 py-1 rounded-full">Out of Stock</span>`
+                            }
+                        </div>
+
+                        <p class="text-stone-600 leading-relaxed text-lg">${product.description}</p>
+
+                        <div class="bg-white rounded-2xl shadow-sm p-6">
+                            <h2 class="text-2xl font-serif text-emerald-900 mb-4">Plant Care & Highlights</h2>
+                            <ul class="space-y-3 text-stone-600">
+                                ${tips}
+                            </ul>
+                        </div>
+
+                        <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                            <h3 class="text-xl font-serif text-emerald-900 mb-3">Why you'll love it</h3>
+                            <p class="text-stone-700 leading-relaxed">
+                                This plant adds color, freshness, and elegance to any indoor space. It is ideal for plant lovers who want a lively blooming plant with decorative appeal.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4 flex-wrap">
+                            ${product.stock > 0
+                                ? `<button onclick="addToCart(${product.id})" class="bg-emerald-700 text-white px-8 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg">
+                                        Add to Cart
+                                   </button>`
+                                : `<button disabled class="bg-stone-300 text-stone-500 px-8 py-3 rounded-full cursor-not-allowed">
+                                        Out of Stock
+                                   </button>`
+                            }
+                            <a href="plants.html" class="border-2 border-emerald-700 text-emerald-700 px-8 py-3 rounded-full hover:bg-emerald-50 transition">
+                                Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadProductDetails() {
+            const productId = getProductIdFromUrl();
+            const container = document.getElementById('product-details');
+
+            if (!productId) {
+                container.innerHTML = `<div class="text-center py-16 text-red-600">No product selected.</div>`;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/products/${productId}`);
+
+                if (!response.ok) {
+                    throw new Error('Failed to load product');
+                }
+
+                const product = await response.json();
+                currentProduct = product;
+                renderProduct(product);
+            } catch (error) {
+                console.error('Error loading product details:', error);
+                container.innerHTML = `
+                    <div class="text-center py-16">
+                        <p class="text-stone-600 mb-4">Unable to load product details.</p>
+                        <a href="plants.html" class="bg-emerald-700 text-white px-6 py-2 rounded-full hover:bg-emerald-800 transition">
+                            Back to Plants
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        async function addToCart(productId) {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                alert('Please login to add items to cart.');
+                window.location.href = 'auth.html?redirect=product.html?id=' + productId;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/cart/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ product_id: productId, quantity: 1 })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Plant added to cart!');
+                    updateCartCount();
+                } else {
+                    alert(data.message || 'Failed to add to cart.');
+                }
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProductDetails);
+    </script>
+</body>
+</html>
